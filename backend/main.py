@@ -1,10 +1,14 @@
 import os
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
 
 # Point template and static folders to the frontend directory
 app = Flask(__name__, template_folder='../frontend', static_folder='../frontend', static_url_path='')
-app.secret_key = 'mukherjee_paljichar_secret'
+app.secret_key = os.environ.get('SECRET_KEY', 'default_dev_key')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecommerce.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
