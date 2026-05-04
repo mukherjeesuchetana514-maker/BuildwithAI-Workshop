@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success | MUKHERJEE FURNITURE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="antialiased bg-[#FAFAFA] flex flex-col min-h-screen">
+    <nav class="fixed w-full z-50 glassmorphism transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-2xl tracking-widest uppercase"><a href="/">MUKHERJEE FURNITURE</a></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-32 pb-12 px-4 flex items-center justify-center">
+        <div class="text-center bg-white p-12 rounded-2xl shadow-sm border border-gray-100 max-w-lg w-full">
+            <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100 mb-6">
+                <svg class="h-12 w-12 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4 tracking-tight uppercase">Thank You!</h1>
+            <p class="text-gray-600 mb-8 font-light">Your order has been placed successfully. We will send you an email confirmation shortly.</p>
+            <a href="/" class="inline-block w-full bg-black text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition-colors duration-300 shadow-md uppercase tracking-wide">Return to Home</a>
+        </div>
+    </main>
+    <!-- Script for Mobile Menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const sideMenu = document.getElementById('mobile-side-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            function openMenu() {
+                if(overlay && sideMenu) {
+                    overlay.classList.remove('hidden');
+                    void overlay.offsetWidth; // trigger reflow
+                    overlay.classList.remove('opacity-0');
+                    sideMenu.classList.remove('translate-x-full');
+                }
+            }
+
+            function closeMenu() {
+                if(overlay && sideMenu) {
+                    overlay.classList.add('opacity-0');
+                    sideMenu.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            if (btn && closeBtn && sideMenu && overlay) {
+                btn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                overlay.addEventListener('click', closeMenu);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | MUKHERJEE FURNITURE</title>
-    <meta name="description" content="Learn about MUKHERJEE FURNITURE's dedication to premium quality and craftsmanship at MUKHERJEE FURNITURE.">
+    <title>Checkout Success | MUKHERJEE FURNITURE</title>
+    <meta name="description" content="Thank you for your purchase.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
-<body class="antialiased bg-[#FAFAFA]">
+<body class="antialiased bg-[#FAFAFA] flex flex-col min-h-screen">
 
         <!-- Navigation -->
     <nav class="fixed w-full z-50 glassmorphism transition-all duration-300">
@@ -57,35 +57,22 @@
         </div>
     </div>
 
-    <!-- About Hero -->
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1600" alt="Craftsmanship" class="w-full h-full object-cover object-center" />
-            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    <!-- Success Content -->
+    <main class="flex-grow pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full flex items-center justify-center">
+        <div class="bg-white p-12 rounded-3xl shadow-xl text-center border border-gray-100 w-full transform transition-all hover:scale-[1.01] duration-300">
+            <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight uppercase">Order Confirmed!</h1>
+            <p class="text-lg text-gray-600 mb-10 max-w-lg mx-auto font-light">Thank you for choosing Mukherjee Furniture. We are processing your premium order and will update you shortly.</p>
+            <a href="/" class="inline-block bg-black text-white px-10 py-4 rounded-full font-medium hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl uppercase tracking-widest text-sm">Return to Collections</a>
         </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight drop-shadow-lg uppercase">Our Story</h1>
-            <p class="text-lg md:text-xl text-gray-200 font-light drop-shadow-md">A legacy of uncompromising craftsmanship.</p>
-        </div>
-    </section>
-
-    <!-- About Content -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">The Vision of MUKHERJEE FURNITURE</h2>
-        <div class="w-24 h-1 bg-black mx-auto mb-10"></div>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            At MUKHERJEE FURNITURE, we believe that the spaces we inhabit shape the lives we lead. Founded by MUKHERJEE FURNITURE, our brand was born out of a passion for timeless design, sustainable materials, and the meticulous art of furniture making.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            Every piece in our collection is a testament to premium quality and craftsmanship. We source only the finest woods, ethically produced leathers, and the most durable fabrics to ensure that your furniture not only looks stunning but is built to last for generations.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Welcome to a world where elegance meets everyday living. Welcome to MUKHERJEE FURNITURE.
-        </p>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-12">
+    <footer class="bg-black text-white py-12 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h3 class="text-2xl font-bold uppercase tracking-widest mb-4">MUKHERJEE FURNITURE</h3>
             <p class="text-gray-400 text-sm mb-8">Redefining modern living spaces with premium elegance.</p>

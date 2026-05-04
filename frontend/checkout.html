@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | MUKHERJEE FURNITURE</title>
-    <meta name="description" content="Learn about MUKHERJEE FURNITURE's dedication to premium quality and craftsmanship at MUKHERJEE FURNITURE.">
+    <title>Checkout | MUKHERJEE FURNITURE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
-<body class="antialiased bg-[#FAFAFA]">
-
+<body class="antialiased bg-[#FAFAFA] flex flex-col min-h-screen">
         <!-- Navigation -->
     <nav class="fixed w-full z-50 glassmorphism transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,43 +55,56 @@
         </div>
     </div>
 
-    <!-- About Hero -->
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1600" alt="Craftsmanship" class="w-full h-full object-cover object-center" />
-            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight drop-shadow-lg uppercase">Our Story</h1>
-            <p class="text-lg md:text-xl text-gray-200 font-light drop-shadow-md">A legacy of uncompromising craftsmanship.</p>
-        </div>
-    </section>
+    <main class="flex-grow pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 tracking-tight uppercase border-b border-gray-200 pb-4">Secure Checkout</h1>
+        
+        <form action="/checkout" method="POST" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 uppercase tracking-wide">Full Name</label>
+                <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-black focus:border-black sm:text-sm">
+            </div>
+            
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 uppercase tracking-wide">Email ID</label>
+                <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-black focus:border-black sm:text-sm">
+            </div>
+            
+            <div>
+                <label for="address" class="block text-sm font-medium text-gray-700 uppercase tracking-wide">Shipping Address</label>
+                <textarea id="address" name="address" rows="3" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-black focus:border-black sm:text-sm"></textarea>
+            </div>
+            
+            <div class="pt-4 border-t border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900 uppercase tracking-wide mb-4">Payment Method</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <input id="credit-card" name="payment_method" type="radio" value="credit_card" checked class="focus:ring-black h-4 w-4 text-black border-gray-300">
+                        <label for="credit-card" class="ml-3 block text-sm font-medium text-gray-700">Credit / Debit Card</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="paypal" name="payment_method" type="radio" value="paypal" class="focus:ring-black h-4 w-4 text-black border-gray-300">
+                        <label for="paypal" class="ml-3 block text-sm font-medium text-gray-700">PayPal</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="cod" name="payment_method" type="radio" value="cod" class="focus:ring-black h-4 w-4 text-black border-gray-300">
+                        <label for="cod" class="ml-3 block text-sm font-medium text-gray-700">Cash on Delivery</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-6">
+                <button type="submit" class="w-full bg-black text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide">Place Order</button>
+            </div>
+        </form>
+    </main>
 
-    <!-- About Content -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">The Vision of MUKHERJEE FURNITURE</h2>
-        <div class="w-24 h-1 bg-black mx-auto mb-10"></div>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            At MUKHERJEE FURNITURE, we believe that the spaces we inhabit shape the lives we lead. Founded by MUKHERJEE FURNITURE, our brand was born out of a passion for timeless design, sustainable materials, and the meticulous art of furniture making.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            Every piece in our collection is a testament to premium quality and craftsmanship. We source only the finest woods, ethically produced leathers, and the most durable fabrics to ensure that your furniture not only looks stunning but is built to last for generations.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Welcome to a world where elegance meets everyday living. Welcome to MUKHERJEE FURNITURE.
-        </p>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black text-white py-12">
+    <footer class="bg-black text-white py-12 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h3 class="text-2xl font-bold uppercase tracking-widest mb-4">MUKHERJEE FURNITURE</h3>
-            <p class="text-gray-400 text-sm mb-8">Redefining modern living spaces with premium elegance.</p>
             <p class="text-xs text-gray-600">&copy; 2026 MUKHERJEE FURNITURE. All rights reserved.</p>
         </div>
     </footer>
-
-        <!-- Script for Mobile Menu -->
+    <!-- Script for Mobile Menu -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('mobile-menu-btn');

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | MUKHERJEE FURNITURE</title>
+    <meta name="description" content="View your selected premium furniture items.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="antialiased bg-[#FAFAFA] flex flex-col min-h-screen">
+
+        <!-- Navigation -->
+    <nav class="fixed w-full z-50 glassmorphism transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center overflow-hidden">
+                    <span class="font-bold text-lg sm:text-xl md:text-2xl tracking-widest uppercase truncate"><a href="/">MUKHERJEE FURNITURE</a></span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="/#collections" class="text-gray-800 hover:text-black transition-colors duration-200 text-sm font-medium tracking-wide uppercase">Collections</a>
+                    <a href="/about" class="text-gray-800 hover:text-black transition-colors duration-200 text-sm font-medium tracking-wide uppercase">About</a>
+                    <a href="/contact" class="text-gray-800 hover:text-black transition-colors duration-200 text-sm font-medium tracking-wide uppercase">Contact Us</a>
+                    <a href="/cart" class="text-gray-800 hover:text-black transition-colors duration-200 text-sm font-medium tracking-wide uppercase">Cart</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="block md:hidden text-gray-800 hover:text-black focus:outline-none">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[60] hidden transition-opacity duration-300 opacity-0"></div>
+    
+    <!-- Mobile Side Menu -->
+    <div id="mobile-side-menu" class="fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-[70] transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-5 flex justify-end border-b border-gray-100">
+            <button id="close-menu-btn" class="text-gray-800 hover:text-black focus:outline-none p-2 rounded-full hover:bg-gray-100 transition-colors">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="px-4 py-6 space-y-2 flex-grow">
+            <a href="/#collections" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-800 hover:text-white hover:bg-black uppercase tracking-wide transition-colors duration-200">Collections</a>
+            <a href="/about" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-800 hover:text-white hover:bg-black uppercase tracking-wide transition-colors duration-200">About</a>
+            <a href="/contact" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-800 hover:text-white hover:bg-black uppercase tracking-wide transition-colors duration-200">Contact Us</a>
+            <a href="/cart" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-800 hover:text-white hover:bg-black uppercase tracking-wide transition-colors duration-200">Cart</a>
+        </div>
+        <div class="p-6 border-t border-gray-100">
+            <p class="text-xs text-gray-500 uppercase tracking-widest text-center">Mukherjee Furniture</p>
+        </div>
+    </div>
+
+    <!-- Cart Content -->
+    <main class="flex-grow pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-8 tracking-tight uppercase border-b border-gray-200 pb-4">Shopping Cart</h1>
+            
+            {% if cart_items %}
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                    <ul class="divide-y divide-gray-100">
+                    {% for item in cart_items %}
+                        <li class="p-6 flex flex-col md:flex-row items-center gap-6 hover:bg-gray-50 transition-colors duration-150">
+                            <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="w-24 h-24 object-cover rounded-lg shadow-sm">
+                            <div class="flex-grow text-center md:text-left">
+                                <h3 class="text-lg font-semibold text-gray-900">{{ item.product.name }}</h3>
+                                <p class="text-gray-600 mt-1">{{ item.product.price }}</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <form action="/move-to-wishlist/{{ item.id }}" method="POST">
+                                    <button type="submit" class="w-full sm:w-auto px-4 py-2 border border-black rounded-full text-xs font-medium hover:bg-gray-100 transition-colors duration-200 shadow-sm uppercase">Move to Wishlist</button>
+                                </form>
+                                <form action="/remove-item/{{ item.id }}" method="POST">
+                                    <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-red-50 text-red-600 rounded-full text-xs font-medium hover:bg-red-100 transition-colors duration-200 shadow-sm uppercase flex items-center justify-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                        </svg>
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    <div class="p-6 bg-gray-50 flex flex-col sm:flex-row justify-between items-center border-t border-gray-200 gap-6">
+                        <div class="flex flex-col items-center sm:items-start">
+                            <span class="text-sm text-gray-500 uppercase tracking-widest mb-1">Subtotal</span>
+                            <span class="text-2xl font-bold text-gray-900">{{ total_price }}</span>
+                        </div>
+                        <form action="/checkout" method="GET" class="w-full sm:w-auto">
+                            <button type="submit" class="bg-black text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide w-full sm:w-auto">Proceed to Checkout</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class="text-center py-20 bg-white rounded-2xl shadow-sm border border-gray-100">
+                    <svg class="mx-auto h-16 w-16 text-gray-300 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <p class="text-xl text-gray-500 mb-8 font-light">Your shopping cart is elegantly empty.</p>
+                    <a href="/" class="inline-block bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition-all duration-300 shadow-md hover:shadow-lg uppercase tracking-wide">Continue Shopping</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 tracking-tight uppercase border-b border-gray-200 pb-4">Wishlist</h2>
+            {% if wishlist_items %}
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                    <ul class="divide-y divide-gray-100">
+                    {% for item in wishlist_items %}
+                        <li class="p-6 flex flex-col md:flex-row items-center gap-6 hover:bg-gray-50 transition-colors duration-150">
+                            <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="w-24 h-24 object-cover rounded-lg shadow-sm">
+                            <div class="flex-grow text-center md:text-left">
+                                <h3 class="text-lg font-semibold text-gray-900">{{ item.product.name }}</h3>
+                                <p class="text-gray-600 mt-1">{{ item.product.price }}</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <form action="/move-to-cart/{{ item.id }}" method="POST">
+                                    <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-black text-white rounded-full text-xs font-medium hover:bg-gray-800 transition-colors duration-200 shadow-md uppercase">Move to Cart</button>
+                                </form>
+                                <form action="/remove-item/{{ item.id }}" method="POST">
+                                    <button type="submit" class="w-full sm:w-auto px-4 py-2 border border-gray-300 text-gray-500 rounded-full text-xs font-medium hover:bg-gray-100 hover:text-red-500 transition-colors duration-200 shadow-sm uppercase flex items-center justify-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                        </svg>
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="text-center py-12 bg-white rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-lg text-gray-500 font-light">Your wishlist is currently empty.</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-2xl font-bold uppercase tracking-widest mb-4">MUKHERJEE FURNITURE</h3>
+            <p class="text-gray-400 text-sm mb-8">Redefining modern living spaces with premium elegance.</p>
+            <p class="text-xs text-gray-600">&copy; 2026 MUKHERJEE FURNITURE. All rights reserved.</p>
+        </div>
+    </footer>
+
+        <!-- Script for Mobile Menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const sideMenu = document.getElementById('mobile-side-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            function openMenu() {
+                if(overlay && sideMenu) {
+                    overlay.classList.remove('hidden');
+                    void overlay.offsetWidth; // trigger reflow
+                    overlay.classList.remove('opacity-0');
+                    sideMenu.classList.remove('translate-x-full');
+                }
+            }
+
+            function closeMenu() {
+                if(overlay && sideMenu) {
+                    overlay.classList.add('opacity-0');
+                    sideMenu.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            if (btn && closeBtn && sideMenu && overlay) {
+                btn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                overlay.addEventListener('click', closeMenu);
+            }
+        });
+    </script>
+</body>
+</html>

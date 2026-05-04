@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | MUKHERJEE FURNITURE</title>
-    <meta name="description" content="Learn about MUKHERJEE FURNITURE's dedication to premium quality and craftsmanship at MUKHERJEE FURNITURE.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body class="antialiased bg-[#FAFAFA]">
+import os
+import glob
+import re
 
-        <!-- Navigation -->
+new_nav = """    <!-- Navigation -->
     <nav class="fixed w-full z-50 glassmorphism transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -55,45 +46,9 @@
         <div class="p-6 border-t border-gray-100">
             <p class="text-xs text-gray-500 uppercase tracking-widest text-center">Mukherjee Furniture</p>
         </div>
-    </div>
+    </div>"""
 
-    <!-- About Hero -->
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1600" alt="Craftsmanship" class="w-full h-full object-cover object-center" />
-            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight drop-shadow-lg uppercase">Our Story</h1>
-            <p class="text-lg md:text-xl text-gray-200 font-light drop-shadow-md">A legacy of uncompromising craftsmanship.</p>
-        </div>
-    </section>
-
-    <!-- About Content -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">The Vision of MUKHERJEE FURNITURE</h2>
-        <div class="w-24 h-1 bg-black mx-auto mb-10"></div>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            At MUKHERJEE FURNITURE, we believe that the spaces we inhabit shape the lives we lead. Founded by MUKHERJEE FURNITURE, our brand was born out of a passion for timeless design, sustainable materials, and the meticulous art of furniture making.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-8">
-            Every piece in our collection is a testament to premium quality and craftsmanship. We source only the finest woods, ethically produced leathers, and the most durable fabrics to ensure that your furniture not only looks stunning but is built to last for generations.
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed">
-            Welcome to a world where elegance meets everyday living. Welcome to MUKHERJEE FURNITURE.
-        </p>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 class="text-2xl font-bold uppercase tracking-widest mb-4">MUKHERJEE FURNITURE</h3>
-            <p class="text-gray-400 text-sm mb-8">Redefining modern living spaces with premium elegance.</p>
-            <p class="text-xs text-gray-600">&copy; 2026 MUKHERJEE FURNITURE. All rights reserved.</p>
-        </div>
-    </footer>
-
-        <!-- Script for Mobile Menu -->
+new_script = """    <!-- Script for Mobile Menu -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('mobile-menu-btn');
@@ -126,6 +81,26 @@
                 overlay.addEventListener('click', closeMenu);
             }
         });
-    </script>
-</body>
-</html>
+    </script>"""
+
+nav_pattern = re.compile(r'<!-- Navigation -->.*?</nav>', re.DOTALL)
+script_pattern = re.compile(r'<!-- Script for Mobile Menu -->.*?</script>', re.DOTALL)
+
+for filepath in glob.glob("frontend/*.html"):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    if '<!-- Navigation -->' in content:
+        content = nav_pattern.sub(new_nav, content)
+        
+    if '<!-- Script for Mobile Menu -->' in content:
+        content = script_pattern.sub(new_script, content)
+    else:
+        # If it doesn't have the script, insert it before </body>
+        if '</body>' in content:
+            content = content.replace('</body>', new_script + '\n</body>')
+            
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
+        
+print("Updated all HTML files.")
