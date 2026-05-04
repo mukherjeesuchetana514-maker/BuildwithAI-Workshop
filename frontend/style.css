@@ -1,0 +1,27 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAFAFA; /* Warm off-white */
+    color: #111827; /* Sleek dark typography */
+}
+
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Custom Scrollbar for Chat */
+#chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+#chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #d1d5db; 
+    border-radius: 4px;
+}
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af; 
+}
